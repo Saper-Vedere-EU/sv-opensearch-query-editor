@@ -1,10 +1,12 @@
 <template>
-  <div ref="editorDom" :class="{ editorDiv: true, hasError: state.containsError }"></div>
-  <nav>
-    <button @click="onFormatAsTree">Formatter en arbre</button>
-    <button @click="onFormatAsLine">Formatter en ligne</button>
-    <span class="query-error">{{ state.error }}</span>
-  </nav>
+  <div class="sv-query-editor">
+    <div ref="editorDom" :class="{ editorDiv: true, hasError: state.containsError }"></div>
+    <nav>
+      <button @click="onFormatAsTree">Formatter en arbre</button>
+      <button @click="onFormatAsLine">Formatter en ligne</button>
+      <span class="query-error">{{ state.error }}</span>
+    </nav>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -14,6 +16,7 @@ import { formatAsSingleLine, formatAsTreeView } from '../utils/queryFormatter'
 import validate from '../utils/svQueryValidate'
 import { svQueryLang } from '../utils/svQueryLang'
 import { svQueryTheme } from '../utils/svQueryTheme'
+import '../assets/main.css'
 
 const props = defineProps({ modelValue: { type: String, required: true } })
 const emit = defineEmits(['update:modelValue'])
@@ -113,28 +116,3 @@ onMounted(() => {
   })
 })
 </script>
-
-<style scoped>
-nav {
-  display: flex;
-  gap: 16px;
-  margin-bottom: 8px;
-}
-
-.editorDiv {
-  width: 100%;
-  height: 400px;
-  margin-bottom: 16px;
-
-  border: 3px solid white;
-}
-
-.editorDiv.hasError {
-  border: 3px solid crimson;
-}
-
-.query-error {
-  color: crimson;
-  align-self: center;
-}
-</style>
