@@ -1,0 +1,36 @@
+# Source files
+src/
+tests/
+__tests__/
+
+# Development files
+.vscode/
+.idea/
+*.log
+*.tsbuildinfo
+
+# Build tools
+vite.config.ts
+tsconfig.json
+tsconfig.vitest.json
+vitest.config.ts
+eslint.config.ts
+.prettierrc
+
+# Development dependencies
+node_modules/
+.env
+.env.local
+.env.*.local
+
+# Git
+.git/
+.gitignore
+
+# Documentation
+docs/
+*.md
+!README.md
+
+# Development scripts
+scripts/ 
