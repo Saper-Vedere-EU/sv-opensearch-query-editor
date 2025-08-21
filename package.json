@@ -64,7 +64,6 @@
     ".": {
       "types": "./dist/types/index.d.ts",
       "import": "./dist/sv-query-editor.es.js"
-    },
-    "./dist/style.css": "./dist/style.css"
+    }
   }
 }

@@ -34,7 +34,6 @@ This package requires the following peer dependencies:
 ```typescript
 import { createApp } from 'vue'
 import SVQueryEditor from 'sv-query-editor'
-import 'sv-query-editor/dist/style.css'
 
 const app = createApp(App)
 app.use(SVQueryEditor)
@@ -53,7 +52,6 @@ app.mount('#app')
 <script setup lang="ts">
 import { ref } from 'vue'
 import { SVQueryEditor } from 'sv-query-editor'
-import 'sv-query-editor/dist/style.css'
 
 const query = ref('author.name:Dupont AND themes:environnement')
 </script>
