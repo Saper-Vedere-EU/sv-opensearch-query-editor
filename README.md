@@ -23,7 +23,8 @@ This package requires the following peer dependencies:
 ```json
 {
   "vue": "^3.5.18",
-  "monaco-editor": "^0.52.2"
+  "monaco-editor": "^0.52.2",
+  "lucene": "^2.1.1"
 }
 ```
 

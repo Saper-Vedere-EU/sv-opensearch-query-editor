@@ -1,10 +1,16 @@
 <template>
   <div class="sv-query-editor">
-    <div ref="editorDom" :class="{ editorDiv: true, hasError: state.containsError }"></div>
-    <nav>
-      <button @click="onFormatAsTree">Formatter en arbre</button>
-      <button @click="onFormatAsLine">Formatter en ligne</button>
-      <span class="query-error">{{ state.error }}</span>
+    <div
+      ref="monacoEditorDom"
+      :class="{
+        'sv-query-editor__monaco-editor': true,
+        'sv-query-editor__monaco-editor--has-error': state.containsError,
+      }"
+    ></div>
+    <nav class="sv-query-editor__nav">
+      <button class="sv-query-editor__button" @click="onFormatAsTree">Formatter en arbre</button>
+      <button class="sv-query-editor__button" @click="onFormatAsLine">Formatter en ligne</button>
+      <span class="sv-query-editor__error">{{ state.error }}</span>
     </nav>
   </div>
 </template>
@@ -32,7 +38,7 @@ const state = reactive({
 })
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const editorDom = ref<any>(null)
+const monacoEditorDom = ref<any>(null)
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const editorInstance = shallowRef<any | null>(null)
 
@@ -85,7 +91,7 @@ monaco.editor.defineTheme('svQueryTheme', svQueryTheme)
 
 // Wait for the component to be mounted to create the instance
 onMounted(() => {
-  editorInstance.value = monaco.editor.create(editorDom.value, {
+  editorInstance.value = monaco.editor.create(monacoEditorDom.value, {
     language: 'svQuery',
     value: query.value,
     theme: 'svQueryTheme',
@@ -117,15 +123,27 @@ onMounted(() => {
 </script>
 
 <style>
-.sv-query-editor nav {
+.sv-query-editor {
+  --sv-editor-current-line-bg: #c1bebe;
+  --sv-editor-margin-bg: #f8f9fa;
+  --sv-editor-line-numbers: #999999;
+  --sv-editor-background: #f5f5f5;
+  --sv-editor-border: #e1e1e1;
+  --sv-editor-error: crimson;
+  --sv-editor-button-primary: rgb(52, 54, 100);
+  --sv-editor-button-hover: rgba(52, 54, 100, 0.9);
+  --sv-editor-button-active: rgba(52, 54, 100, 0.8);
+}
+
+.sv-query-editor__nav {
   display: flex;
   gap: 16px;
   margin-bottom: 8px;
   align-items: center;
 }
 
-.sv-query-editor button {
-  background-color: rgb(52, 54, 100);
+.sv-query-editor__button {
+  background-color: var(--sv-editor-button-primary);
   color: white;
   border: none;
   cursor: pointer;
@@ -135,43 +153,42 @@ onMounted(() => {
   transition: background-color 0.2s ease;
 }
 
-.sv-query-editor button:hover {
-  background-color: rgba(52, 54, 100, 0.9);
+.sv-query-editor__button:hover {
+  background-color: var(--sv-editor-button-hover);
 }
 
-.sv-query-editor button:active {
-  background-color: rgba(52, 54, 100, 0.8);
+.sv-query-editor__button:active {
+  background-color: var(--sv-editor-button-active);
 }
 
-.query-error {
-  color: crimson;
+.sv-query-editor__error {
+  color: var(--sv-editor-error);
   align-self: center;
 }
 
-/* Monaco Editor */
-.editorDiv {
+.sv-query-editor__monaco-editor {
   height: 400px;
   margin-bottom: 16px;
-  border: 3px solid #e1e1e1;
+  border: 3px solid var(--sv-editor-border);
 }
 
-.editorDiv.hasError {
-  border: 3px solid crimson;
+.sv-query-editor__monaco-editor--has-error {
+  border: 3px solid var(--sv-editor-error);
 }
 
-.editorDiv .margin {
-  background-color: #f8f9fa;
+.sv-query-editor__monaco-editor .margin {
+  background-color: var(--sv-editor-margin-bg);
 }
 
-.editorDiv .line-numbers {
-  color: #999999;
+.sv-query-editor__monaco-editor .line-numbers {
+  color: var(--sv-editor-line-numbers);
 }
 
-.editorDiv .current-line {
-  background-color: #c1bebe;
+.sv-query-editor__monaco-editor .current-line {
+  background-color: var(--sv-editor-current-line-bg);
 }
 
 .monaco-editor-background {
-  background-color: #f5f5f5;
+  background-color: var(--sv-editor-background);
 }
 </style>

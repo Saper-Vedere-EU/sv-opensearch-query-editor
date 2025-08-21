@@ -9,8 +9,8 @@
   "engines": {
     "node": "^20.19.0 || >=22.12.0"
   },
-  "main": "./dist/sv-query-editor.es.js",
-  "module": "./dist/sv-query-editor.es.js",
+  "main": "./dist/sv-query-editor.umd.cjs",
+  "module": "./dist/sv-query-editor.js",
   "types": "./dist/types/index.d.ts",
   "files": [
     "dist"
@@ -49,7 +49,6 @@
     "eslint-plugin-vue": "~10.3.0",
     "jiti": "^2.4.2",
     "jsdom": "^26.1.0",
-    "lucene": "^2.1.1",
     "monaco-editor": "^0.52.2",
     "npm-run-all2": "^8.0.4",
     "prettier": "3.6.2",
@@ -60,10 +59,13 @@
     "vue": "^3.5.18",
     "vue-tsc": "^3.0.4"
   },
+  "dependencies": {
+    "lucene": "^2.1.1"
+  },
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",
-      "import": "./dist/sv-query-editor.es.js"
+      "import": "./dist/sv-query-editor.umd.cjs"
     }
   }
 }
